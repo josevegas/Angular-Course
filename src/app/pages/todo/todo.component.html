@@ -1,6 +1,7 @@
+<button (click)="selectProjectContent()">Seleccionar Contenido</button>
 <div
     class="card-container"
-    [class]="{'first':first,'last':last,'odd':odd,'even':even}"
+    
 >
     @if(todoData){
         <span class="icon-close" (click)="onClickIcon.emit(todoData)">x</span>
@@ -10,6 +11,7 @@
                 <p>{{todoData.description}}</p>
             </div>
         </div>
+        <ng-content></ng-content>
         <div class="card-content pills-container">
             <p>Estado: 
                 <!-- <span

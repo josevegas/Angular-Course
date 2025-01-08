@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, LOCALE_ID, Output, Pipe } from '@angular/core';
+import { Component, ContentChildren, EventEmitter, Input, LOCALE_ID, Output, Pipe } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import spanish from '@angular/common/locales/es';
+import { InputComponent } from '../../components/input/input.component';
 registerLocaleData(spanish)
 
 @Component({
@@ -18,11 +19,12 @@ registerLocaleData(spanish)
 })
 export class TodoComponent {
   @Input({required: true}) todoData!: NTodo.TodoData;
-  @Input() first!:boolean;
-  @Input() last!:boolean;
-  @Input() odd!: boolean;
-  @Input() even!: boolean;
+  // @Input() first!:boolean;
+  // @Input() last!:boolean;
+  // @Input() odd!: boolean;
+  // @Input() even!: boolean;
   @Output() onClickIcon=new EventEmitter<NTodo.TodoData>();
+  @ContentChildren(InputComponent) projectContent?:InputComponent;
   get priority():string{
     switch (this.todoData.priority) {
       case NTodo.Priority.LOW:
@@ -49,5 +51,8 @@ export class TodoComponent {
     }else{
       return NTodo.RangeText.HIGH;
     }
+  }
+  selectProjectContent(){
+    console.log(this.projectContent)
   }
 }
