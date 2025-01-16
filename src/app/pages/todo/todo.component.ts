@@ -1,4 +1,4 @@
-import { Component, ContentChildren, EventEmitter, Input, LOCALE_ID, Output, Pipe } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, ContentChild, ContentChildren, DoCheck, ElementRef, EventEmitter, Input, LOCALE_ID, OnChanges, OnInit, Output, Pipe, SimpleChanges } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import spanish from '@angular/common/locales/es';
@@ -17,14 +17,33 @@ registerLocaleData(spanish)
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss'
 })
-export class TodoComponent {
+export class TodoComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked{
+  ngAfterContentChecked(): void {
+    const input=this.projectContent?.nativeElement;
+    input?.focus();
+    console.log('ngAfterContentChecked');
+  }
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit');
+  }
+  msg='';
+  ngDoCheck(): void {
+    if(this.msg==='alert') alert('¡Cuidado!');
+    this.msg='';
+  }
+  ngOnInit(): void {
+    console.log('ngOnInit');
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
   @Input({required: true}) todoData!: NTodo.TodoData;
   // @Input() first!:boolean;
   // @Input() last!:boolean;
   // @Input() odd!: boolean;
   // @Input() even!: boolean;
   @Output() onClickIcon=new EventEmitter<NTodo.TodoData>();
-  @ContentChildren(InputComponent) projectContent?:InputComponent;
+  @ContentChild(InputComponent, {read:ElementRef}) projectContent?:ElementRef<HTMLElement>;
   get priority():string{
     switch (this.todoData.priority) {
       case NTodo.Priority.LOW:
@@ -53,6 +72,6 @@ export class TodoComponent {
     }
   }
   selectProjectContent(){
-    console.log(this.projectContent)
+    this.msg='alert'
   }
 }
