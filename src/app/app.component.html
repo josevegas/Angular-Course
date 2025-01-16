@@ -1,19 +1,6 @@
-<app-navbar></app-navbar>
-<!-- <div class="todo-container">
-  @for (item of todoData; track item.id; ) {
-    <app-todo [todoData]="item" (onClickIcon)="getTodoInfo($event)">
-      <app-input placeholder="Nombres"></app-input><br>
-      <app-input placeholder="Apellidos"></app-input><br>
-      <app-input placeholder="Edad" type="number"></app-input>
-      <div class="comment" style="margin-top: 1rem;">
-        <textarea rows="5"></textarea>
-      </div>
-    </app-todo>
-  }@empty {
-    No hay datos
-  }
-</div>
-<br/>
-<button (click)="orderData()">Ordenar</button>
-<button (click)="selectToDo()">Seleccionar Todo</button> -->
-<app-footer></app-footer>
+<!-- <app-navbar></app-navbar> -->
+<section class="content">
+  <router-outlet></router-outlet>
+</section>
+
+<!-- <app-footer></app-footer> -->
