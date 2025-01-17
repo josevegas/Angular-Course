@@ -7,16 +7,13 @@ export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        title: 'Mi Nombre',
     },
     {
-        path: '/disenoweb',
+        path: 'disenoweb',
         component: WebdesingComponent,
-        title: 'Diseño Web',
     },
     {
-        path: '/diseno-organizacional',
+        path: 'diseno-organizacional',
         component: OrgdesingComponent,
-        title: "Diseño Organizacional"
     }
 ];
